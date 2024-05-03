@@ -11,7 +11,7 @@ fill_from = Vector2(0.461538, 0.598291)
 [node name="world" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(8, 0)
+position = Vector2(250, 144)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(245, 138)
