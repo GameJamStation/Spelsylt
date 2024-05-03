@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4wxjpeqwpvyx"]
+
+[sub_resource type="Gradient" id="Gradient_yupuy"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tlrum"]
+gradient = SubResource("Gradient_yupuy")
+width = 160
+height = 90
+fill_from = Vector2(0.461538, 0.598291)
+
+[node name="world" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(245, 138)
+texture = SubResource("GradientTexture2D_tlrum")
