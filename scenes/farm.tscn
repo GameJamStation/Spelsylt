@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://xjnlcna0b87t"]
+
+[ext_resource type="Texture2D" uid="uid://dynmji5sp3elp" path="res://assets/rooster.png" id="1_03rtq"]
+[ext_resource type="Shader" path="res://Shaders/Pixelation.gdshader" id="1_e27wd"]
+[ext_resource type="Texture2D" uid="uid://bub2tka8ypv5s" path="res://assets/farm/fram-n-silo-1.jpg" id="1_k32wq"]
+[ext_resource type="Script" path="res://scenes/Camera.gd" id="1_ya5mg"]
+[ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="2_8srxb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rbsq0"]
+shader = ExtResource("1_e27wd")
+shader_parameter/pixelSize = 4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp5n1"]
+shader = ExtResource("1_e27wd")
+shader_parameter/pixelSize = 4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i81ri"]
+radius = 170.0
+
+[node name="farm" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.5, 0.5)
+script = ExtResource("1_ya5mg")
+TARGET_OFFSET = Vector2(0, -100)
+
+[node name="Map" type="Node2D" parent="."]
+material = SubResource("ShaderMaterial_rbsq0")
+
+[node name="Fram-n-silo-1" type="Sprite2D" parent="Map"]
+use_parent_material = true
+position = Vector2(1331, -1608)
+scale = Vector2(2.11679, 2.11679)
+texture = ExtResource("1_k32wq")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("2_8srxb")
+
+[node name="Rooster" type="Sprite2D" parent="CharacterBody2D"]
+material = SubResource("ShaderMaterial_hp5n1")
+position = Vector2(-14, -103)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_03rtq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(12, -90)
+shape = SubResource("CircleShape2D_i81ri")
+
+[node name="Terrain" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain"]
+polygon = PackedVector2Array(-2931, 860, -2912, 1238, 5759, 1221, 5750, 767, 5778, -957, 5017, 1076, -2482, 711, -2904, -1244)
