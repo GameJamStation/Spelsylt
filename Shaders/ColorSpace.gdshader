@@ -1,21 +1,30 @@
 shader_type canvas_item;
 
-uniform float colors : hint_range(1.0, 16.0);
-uniform float dither : hint_range(0.0, 0.5);
+
+uniform float pixelFactor = 320; //: //hint_range(1.0, 1024, 1)
+uniform float colorFactor : hint_range(1.0, 16.0) = 4.0;
+uniform float brightNessFactor = 0.2;
+uniform float ditherScale = 0.005;
 
 void fragment()
 {
-	vec4 color = texture(TEXTURE, UV);
+	const mat4 ditherTable = mat4(
+    	vec4(-4.0, 0.0, -3.0, 1.0),
+    	vec4(2.0, -2.0, 3.0, -1.0),
+	    vec4(-3.0, 1.0, -4.0, 0.0),
+    	vec4(3.0, -1.0, 2.0, -2.0)
+	);
 	
-	float a = floor(mod(UV.x / TEXTURE_PIXEL_SIZE.x, 2.0));
-	float b = floor(mod(UV.y / TEXTURE_PIXEL_SIZE.y, 2.0));	
-	float c = mod(a + b, 2.0);
+	vec2 iResolution = 1.0 / SCREEN_PIXEL_SIZE;
+	vec2 size =  pixelFactor * iResolution.xy / iResolution.x;
+	vec2 coor = floor(FRAGCOORD.xy / iResolution.xy * size);
 	
-	COLOR.r = (round(color.r * colors + dither) / colors) * c;
-	COLOR.g = (round(color.g * colors + dither) / colors) * c;
-	COLOR.b = (round(color.b * colors + dither) / colors) * c;
-	c = 1.0 - c;
-	COLOR.r += (round(color.r * colors - dither) / colors) * c;
-	COLOR.g += (round(color.g * colors - dither) / colors) * c;
-	COLOR.b += (round(color.b * colors - dither) / colors) * c;
+	//
+	vec3 color = texture(TEXTURE, UV).xyz;
+	
+	color += ditherTable[int(coor.x) % 4][int(coor.y) % 4] * ditherScale;
+	
+	color = 1.01f * brightNessFactor + floor(color * colorFactor) / colorFactor;
+	
+	COLOR = vec4(color.xyz,1.0);
 }

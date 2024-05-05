@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://dav433jn8sw6v"]
+[gd_scene load_steps=9 format=3 uid="uid://dav433jn8sw6v"]
 
 [ext_resource type="Shader" path="res://Shaders/ScreenSpacePixelation.gdshader" id="1_jq6j7"]
 [ext_resource type="PackedScene" uid="uid://xjnlcna0b87t" path="res://scenes/farm.tscn" id="1_s2bh6"]
 [ext_resource type="Shader" path="res://Shaders/ColorSpace.gdshader" id="2_qxyvy"]
+[ext_resource type="Shader" path="res://scenes/abberationVinyett.gdshader" id="3_j6fjr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ry3m3"]
 shader = ExtResource("1_jq6j7")
@@ -10,17 +11,24 @@ shader_parameter/pixel_size = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_68ojv"]
 shader = ExtResource("2_qxyvy")
-shader_parameter/colors = 5.0
-shader_parameter/dither = 0.0
+shader_parameter/pixelFactor = 360.0
+shader_parameter/colorFactor = 6.0
+shader_parameter/brightNessFactor = 0.01
+shader_parameter/ditherScale = 0.005
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jwj7a"]
 shader = ExtResource("2_qxyvy")
-shader_parameter/colors = null
-shader_parameter/dither = null
+shader_parameter/pixelFactor = 320.0
+shader_parameter/colorFactor = 4.0
+shader_parameter/brightNessFactor = 0.2
+shader_parameter/ditherScale = 0.005
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_8na5y"]
-shader = ExtResource("1_jq6j7")
-shader_parameter/pixel_size = 4.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j8hwy"]
+shader = ExtResource("3_j6fjr")
+shader_parameter/alpha = 0.0
+shader_parameter/scale = 1.0
+shader_parameter/border_mask = 2.0
+shader_parameter/strength = 0.0
 
 [node name="Game" type="Node2D"]
 texture_filter = 1
@@ -44,12 +52,8 @@ material = SubResource("ShaderMaterial_jwj7a")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 visible = false
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_8na5y")
-anchors_preset = -1
-anchor_right = 1.06925
-anchor_bottom = 1.0
-offset_right = 1.5199
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_j8hwy")
+layout_direction = 1
+offset_right = 1026.0
+offset_bottom = 600.0
