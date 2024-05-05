@@ -22,7 +22,6 @@ func apply_shake(strenght: float):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float):
-
 	shake_strength = lerp(shake_strength, 0.0, SHAKE_DECAY_RATE * delta)
 
 	self.offset = get_noise_offset() 

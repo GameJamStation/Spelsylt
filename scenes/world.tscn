@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://c4wxjpeqwpvyx"]
+[gd_scene load_steps=13 format=3 uid="uid://c4wxjpeqwpvyx"]
 
 [ext_resource type="Script" path="res://scenes/Camera.gd" id="1_eo4m4"]
 [ext_resource type="Script" path="res://scenes/Cock.gd" id="2_emrva"]
+[ext_resource type="Script" path="res://scenes/Head.gd" id="3_b57rk"]
 
 [sub_resource type="Gradient" id="Gradient_yupuy"]
 
@@ -12,10 +13,15 @@ height = 90
 fill_from = Vector2(0.461538, 0.598291)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_phj4y"]
-size = Vector2(1004, 49)
+size = Vector2(1005, 41)
+
+[sub_resource type="Gradient" id="Gradient_8cf7d"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ibgjg"]
+gradient = SubResource("Gradient_8cf7d")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d444i"]
-radius = 51.7421
+radius = 30.9071
 
 [sub_resource type="Gradient" id="Gradient_ltyr7"]
 
@@ -23,7 +29,7 @@ radius = 51.7421
 gradient = SubResource("Gradient_ltyr7")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xp8kh"]
-radius = 40.5123
+radius = 21.37
 
 [node name="world" type="Node2D"]
 
@@ -40,21 +46,39 @@ scale = Vector2(6.30625, 0.455556)
 texture = SubResource("GradientTexture2D_tlrum")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(424, 20.5)
+position = Vector2(423.5, 24.5)
 shape = SubResource("RectangleShape2D_phj4y")
 
 [node name="Cock" type="Node2D" parent="."]
 position = Vector2(344, 160)
 script = ExtResource("2_emrva")
 
-[node name="Body" type="RigidBody2D" parent="Cock"]
-mass = 4.0
+[node name="NeckPath" type="Node" parent="Cock"]
 
-[node name="HeadSpring" type="DampedSpringJoint2D" parent="Cock/Body"]
-position = Vector2(0, -86)
-node_a = NodePath("..")
-node_b = NodePath("../../Head")
-bias = 0.9
+[node name="neck1" type="Sprite2D" parent="Cock/NeckPath"]
+z_index = -1
+position = Vector2(8, -59.25)
+scale = Vector2(0.375, 0.351563)
+texture = SubResource("GradientTexture2D_ibgjg")
+
+[node name="neck2" type="Sprite2D" parent="Cock/NeckPath"]
+z_index = -1
+position = Vector2(8, -59.25)
+scale = Vector2(0.375, 0.351563)
+texture = SubResource("GradientTexture2D_ibgjg")
+
+[node name="neck3" type="Sprite2D" parent="Cock/NeckPath"]
+z_index = -1
+position = Vector2(8, -47)
+scale = Vector2(0.375, 0.351563)
+texture = SubResource("GradientTexture2D_ibgjg")
+
+[node name="Body" type="RigidBody2D" parent="Cock"]
+mass = 3.0
+lock_rotation = true
+
+[node name="NeckStart" type="Marker2D" parent="Cock/Body"]
+position = Vector2(15, -16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cock/Body"]
 position = Vector2(-1.5, -1)
@@ -65,7 +89,14 @@ position = Vector2(-2, 2)
 texture = SubResource("GradientTexture2D_g1gqo")
 
 [node name="Head" type="RigidBody2D" parent="Cock"]
-position = Vector2(3, -108)
+position = Vector2(64, -98)
+gravity_scale = 0.0
+lock_rotation = true
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("3_b57rk")
+
+[node name="NeckEnd" type="Marker2D" parent="Cock/Head"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cock/Head"]
 position = Vector2(0, 1)
