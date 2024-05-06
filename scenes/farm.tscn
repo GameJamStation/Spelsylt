@@ -1,14 +1,15 @@
-[gd_scene load_steps=9 format=3 uid="uid://xjnlcna0b87t"]
+[gd_scene load_steps=10 format=3 uid="uid://xjnlcna0b87t"]
 
 [ext_resource type="Texture2D" uid="uid://dynmji5sp3elp" path="res://assets/rooster.png" id="1_03rtq"]
 [ext_resource type="Shader" path="res://Shaders/Pixelation.gdshader" id="1_e27wd"]
-[ext_resource type="Texture2D" uid="uid://bub2tka8ypv5s" path="res://assets/farm/fram-n-silo-1.jpg" id="1_k32wq"]
 [ext_resource type="Script" path="res://scenes/Camera.gd" id="1_ya5mg"]
 [ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="2_8srxb"]
+[ext_resource type="Texture2D" uid="uid://dpudnknjhygaj" path="res://assets/farm/grass_field_background.png" id="3_6bnsi"]
+[ext_resource type="Texture2D" uid="uid://da46jk4u5dy0d" path="res://assets/farm/barn.png" id="4_3u0i3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c656r"]
 shader = ExtResource("1_e27wd")
-shader_parameter/pixelSize = 1
+shader_parameter/pixelSize = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hp5n1"]
 shader = ExtResource("1_e27wd")
@@ -20,20 +21,31 @@ radius = 170.0
 [node name="farm" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.25, 0.25)
 script = ExtResource("1_ya5mg")
 TARGET_OFFSET = Vector2(0, -100)
 
 [node name="Map" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_c656r")
 
+[node name="GrassFieldBackground2" type="Sprite2D" parent="Map"]
+position = Vector2(-14931.7, -1029.76)
+scale = Vector2(5.17779, 3.25364)
+texture = ExtResource("3_6bnsi")
+
+[node name="GrassFieldBackground" type="Sprite2D" parent="Map"]
+position = Vector2(26463.3, -1027.76)
+scale = Vector2(-5.178, 3.254)
+texture = ExtResource("3_6bnsi")
+
 [node name="Fram-n-silo-1" type="Sprite2D" parent="Map"]
 use_parent_material = true
-position = Vector2(1331, -1608)
+position = Vector2(-285, -2412)
 scale = Vector2(2.11679, 2.11679)
-texture = ExtResource("1_k32wq")
+texture = ExtResource("4_3u0i3")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, -130)
 script = ExtResource("2_8srxb")
 
 [node name="Rooster" type="Sprite2D" parent="CharacterBody2D"]
@@ -48,4 +60,6 @@ shape = SubResource("CircleShape2D_i81ri")
 [node name="Terrain" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain"]
-polygon = PackedVector2Array(-2931, 860, -2912, 1238, 5759, 1221, 5750, 767, 5778, -957, 5017, 1076, -2482, 711, -2904, -1244)
+position = Vector2(-2510, -775)
+scale = Vector2(4.93362, 1)
+polygon = PackedVector2Array(-6685.56, 1736, 10067.9, 1774, 10064, -2412, 9911.19, -557, 3198.67, 700, -1650.11, 826, -6553.61, -701, -6677.66, -2240)
