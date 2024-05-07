@@ -20,13 +20,13 @@ size = Vector2(1005, 41)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ibgjg"]
 gradient = SubResource("Gradient_8cf7d")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d444i"]
-radius = 30.9071
-
 [sub_resource type="Gradient" id="Gradient_ltyr7"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_g1gqo"]
 gradient = SubResource("Gradient_ltyr7")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d444i"]
+radius = 30.9071
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xp8kh"]
 radius = 21.37
@@ -34,7 +34,7 @@ radius = 21.37
 [node name="world" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(250, 144)
+position = Vector2(529, 162)
 script = ExtResource("1_eo4m4")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -46,6 +46,19 @@ scale = Vector2(6.30625, 0.455556)
 texture = SubResource("GradientTexture2D_tlrum")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(423.5, 24.5)
+shape = SubResource("RectangleShape2D_phj4y")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(1015, -494)
+scale = Vector2(0.0258251, 21.486)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(424.5, 24.5)
+scale = Vector2(6.30625, 0.455556)
+texture = SubResource("GradientTexture2D_tlrum")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 position = Vector2(423.5, 24.5)
 shape = SubResource("RectangleShape2D_phj4y")
 
@@ -74,22 +87,27 @@ scale = Vector2(0.375, 0.351563)
 texture = SubResource("GradientTexture2D_ibgjg")
 
 [node name="Body" type="RigidBody2D" parent="Cock"]
+collision_layer = 2
+collision_mask = 5
 mass = 3.0
 lock_rotation = true
 
-[node name="NeckStart" type="Marker2D" parent="Cock/Body"]
-position = Vector2(15, -16)
+[node name="Flippable" type="Node2D" parent="Cock/Body"]
+
+[node name="NeckStart" type="Marker2D" parent="Cock/Body/Flippable"]
+position = Vector2(18, -18)
+
+[node name="Sprite2D" type="Sprite2D" parent="Cock/Body/Flippable"]
+texture = SubResource("GradientTexture2D_g1gqo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cock/Body"]
 position = Vector2(-1.5, -1)
 shape = SubResource("CircleShape2D_d444i")
 
-[node name="Sprite2D" type="Sprite2D" parent="Cock/Body"]
-position = Vector2(-2, 2)
-texture = SubResource("GradientTexture2D_g1gqo")
-
 [node name="Head" type="RigidBody2D" parent="Cock"]
 position = Vector2(64, -98)
+collision_layer = 8
+collision_mask = 9
 gravity_scale = 0.0
 lock_rotation = true
 max_contacts_reported = 4
