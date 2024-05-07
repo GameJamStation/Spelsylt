@@ -1,22 +1,42 @@
-[gd_scene load_steps=10 format=3 uid="uid://xjnlcna0b87t"]
+[gd_scene load_steps=15 format=3 uid="uid://xjnlcna0b87t"]
 
 [ext_resource type="Texture2D" uid="uid://dynmji5sp3elp" path="res://assets/rooster.png" id="1_03rtq"]
 [ext_resource type="Shader" path="res://Shaders/Pixelation.gdshader" id="1_e27wd"]
 [ext_resource type="Script" path="res://scenes/Camera.gd" id="1_ya5mg"]
 [ext_resource type="Script" path="res://scenes/CharacterBody2D.gd" id="2_8srxb"]
 [ext_resource type="Texture2D" uid="uid://dpudnknjhygaj" path="res://assets/farm/grass_field_background.png" id="3_6bnsi"]
+[ext_resource type="Shader" path="res://Shaders/OutlineShader.gdshader" id="4_2hbg2"]
 [ext_resource type="Texture2D" uid="uid://da46jk4u5dy0d" path="res://assets/farm/barn.png" id="4_3u0i3"]
+[ext_resource type="Texture2D" uid="uid://krhl5scsvhvp" path="res://assets/farm/bliss_background.png" id="5_vcl6x"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5heg"]
+
+[sub_resource type="Sky" id="Sky_ujbnc"]
+sky_material = SubResource("ProceduralSkyMaterial_f5heg")
+process_mode = 1
+radiance_size = 6
+
+[sub_resource type="Environment" id="Environment_p74xi"]
+sky = SubResource("Sky_ujbnc")
+ambient_light_color = Color(0.941176, 0.988235, 1, 1)
+ambient_light_energy = 3.62
+reflected_light_source = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c656r"]
 shader = ExtResource("1_e27wd")
 shader_parameter/pixelSize = 4
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hp5n1"]
-shader = ExtResource("1_e27wd")
-shader_parameter/pixelSize = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8sk8n"]
+shader = ExtResource("4_2hbg2")
+shader_parameter/color = Color(0.105882, 0.105882, 0.105882, 1)
+shader_parameter/width = 8.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+shader_parameter/number_of_images = Vector2(1, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_i81ri"]
-radius = 170.0
+radius = 289.083
 
 [node name="farm" type="Node2D"]
 
@@ -25,8 +45,29 @@ zoom = Vector2(0.25, 0.25)
 script = ExtResource("1_ya5mg")
 TARGET_OFFSET = Vector2(0, -100)
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p74xi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -59217.0
+offset_top = -13199.0
+offset_right = 47185.0
+offset_bottom = 921.0
+color = Color(0.764706, 0.819608, 1, 1)
+
 [node name="Map" type="Node2D" parent="."]
 material = SubResource("ShaderMaterial_c656r")
+
+[node name="BlissBackground" type="Sprite2D" parent="Map"]
+position = Vector2(-47310, -2085)
+scale = Vector2(3.19618, 3.76463)
+texture = ExtResource("5_vcl6x")
+
+[node name="GrassFieldBackground3" type="Sprite2D" parent="Map"]
+position = Vector2(-2949, 4466)
+rotation = -3.14159
+scale = Vector2(7.35862, 4.85701)
+texture = ExtResource("3_6bnsi")
 
 [node name="GrassFieldBackground2" type="Sprite2D" parent="Map"]
 position = Vector2(-14931.7, -1029.76)
@@ -39,18 +80,17 @@ scale = Vector2(-5.178, 3.254)
 texture = ExtResource("3_6bnsi")
 
 [node name="Fram-n-silo-1" type="Sprite2D" parent="Map"]
-use_parent_material = true
-position = Vector2(-285, -2412)
-scale = Vector2(2.11679, 2.11679)
+material = SubResource("ShaderMaterial_8sk8n")
+position = Vector2(1418.17, -2681.97)
+scale = Vector2(3.37225, 3.37225)
 texture = ExtResource("4_3u0i3")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
-position = Vector2(0, -130)
+position = Vector2(-51401, -2604)
 script = ExtResource("2_8srxb")
 
-[node name="Rooster" type="Sprite2D" parent="CharacterBody2D"]
-material = SubResource("ShaderMaterial_hp5n1")
-position = Vector2(-14, -103)
+[node name="Rooster2" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(33, -101)
 texture = ExtResource("1_03rtq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
@@ -62,4 +102,4 @@ shape = SubResource("CircleShape2D_i81ri")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Terrain"]
 position = Vector2(-2510, -775)
 scale = Vector2(4.93362, 1)
-polygon = PackedVector2Array(-6685.56, 1736, 10067.9, 1774, 10064, -2412, 9911.19, -557, 3198.67, 700, -1650.11, 826, -6553.61, -701, -6677.66, -2240)
+polygon = PackedVector2Array(-6835.35, 667, -6183.69, 1523, 10067.9, 1774, 10064, -2412, 9911.19, -557, 3198.67, 700, 1891.71, 785, 1888.07, -157, 1849.15, -1051, 1514.71, -1039, 1513.49, -1345, 1541.46, -1411, 1481.87, -2431, 1338.37, -3691, 1177.84, -4351, 967.444, -4915, 748.538, -4345, 588.006, -3649, 451.798, -2413, 409.233, -1393, 433.556, -1315, 456.663, 773, -1650.11, 826, -6696.5, -1293, -10221.5, -1103, -10190.7, -4984, -9770.31, -5879, -9974.83, -6488, -11220.4, -6202, -11293.7, 610)
