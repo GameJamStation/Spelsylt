@@ -1,0 +1,105 @@
+[gd_scene load_steps=9 format=3 uid="uid://ciooweqddbdpc"]
+
+[ext_resource type="Script" path="res://scenes/Cock.gd" id="1_ytq8x"]
+[ext_resource type="Texture2D" uid="uid://dynmji5sp3elp" path="res://assets/rooster.png" id="2_blelg"]
+[ext_resource type="Shader" path="res://Shaders/ColorSpace.gdshader" id="3_2puk5"]
+[ext_resource type="Texture2D" uid="uid://dup0yc1byrwyb" path="res://assets/rooster2.png" id="4_yqkq3"]
+[ext_resource type="Script" path="res://scenes/Head.gd" id="5_lpnbq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ws2w8"]
+shader = ExtResource("3_2puk5")
+shader_parameter/pixelFactor = 320.0
+shader_parameter/colorFactor = 4.0
+shader_parameter/brightNessFactor = 0.2
+shader_parameter/ditherScale = 0.005
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_d444i"]
+radius = 30.9071
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xp8kh"]
+radius = 15.0
+
+[node name="Cock" type="Node2D"]
+position = Vector2(344, 160)
+script = ExtResource("1_ytq8x")
+
+[node name="Body" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+mass = 3.0
+lock_rotation = true
+
+[node name="Flippable" type="Node2D" parent="Body"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Body/Flippable"]
+visible = false
+position = Vector2(-4, -2.38419e-06)
+scale = Vector2(0.188973, 0.216981)
+texture = ExtResource("2_blelg")
+region_rect = Rect2(0, 68.0895, 474.829, 461.192)
+
+[node name="Skeleton" type="Skeleton2D" parent="Body/Flippable"]
+
+[node name="root" type="Bone2D" parent="Body/Flippable/Skeleton"]
+rest = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="tail" type="Bone2D" parent="Body/Flippable/Skeleton/root"]
+position = Vector2(-37, -5)
+rotation = 1.54891
+rest = Transform2D(0.0218874, 0.99976, -0.99976, 0.0218874, -37, -5)
+
+[node name="neck" type="Bone2D" parent="Body/Flippable/Skeleton/root"]
+position = Vector2(20, -10)
+rotation = 0.145967
+scale = Vector2(1, 1)
+rest = Transform2D(1, 0, 0, 1, 20, -10)
+
+[node name="head" type="Bone2D" parent="Body/Flippable/Skeleton/root/neck"]
+z_index = 5
+position = Vector2(10, -34)
+rest = Transform2D(1, 0, 0, 1, 10, -34)
+
+[node name="HeadPolygon" type="Polygon2D" parent="Body/Flippable"]
+z_index = 2
+material = SubResource("ShaderMaterial_ws2w8")
+position = Vector2(-52, -54)
+scale = Vector2(0.203936, 0.215228)
+texture = ExtResource("4_yqkq3")
+skeleton = NodePath("../Skeleton")
+polygon = PackedVector2Array(332.673, 109.901, 343.564, 93.0693, 353.465, 72.2772, 366.337, 53.4653, 369.307, 34.6535, 373.267, 11.8812, 382.178, -2.9703, 404.951, -5.9406, 440.594, 3.9604, 454.455, 12.8713, 464.356, 24.7525, 470.297, 43.5644, 476.238, 57.4257, 479.208, 76.2376, 474.257, 87.1287, 460.396, 82.1782, 462.376, 91.0891, 463.366, 103.96, 455.446, 114.851, 452.475, 123.762, 459.406, 137.624, 464.356, 156.436, 466.337, 174.257, 466.337, 187.129, 467.327, 203.96, 464.356, 219.802, 464.356, 238.614, 459.406, 259.406, 455.446, 274.257, 448.515, 288.119, 443.564, 300, 431.683, 310.891, 403.96, 298.02, 379.208, 275.248, 350.495, 251.485, 333.663, 224.752, 316.832, 185.148, 307.921, 157.426, 314.852, 131.683, 325.743, 122.772)
+uv = PackedVector2Array(332.673, 109.901, 343.564, 93.0693, 353.465, 72.2772, 366.337, 53.4653, 369.307, 34.6535, 373.267, 11.8812, 382.178, -2.9703, 404.951, -5.9406, 440.594, 3.9604, 454.455, 12.8713, 464.356, 24.7525, 470.297, 43.5644, 476.238, 57.4257, 479.208, 76.2376, 474.257, 87.1287, 460.396, 82.1782, 462.376, 91.0891, 463.366, 103.96, 455.446, 114.851, 452.475, 123.762, 459.406, 137.624, 464.356, 156.436, 466.337, 174.257, 466.337, 187.129, 467.327, 203.96, 464.356, 219.802, 464.356, 238.614, 459.406, 259.406, 455.446, 274.257, 448.515, 288.119, 443.564, 300, 431.683, 310.891, 403.96, 298.02, 379.208, 275.248, 350.495, 251.485, 333.663, 224.752, 316.832, 185.148, 307.921, 157.426, 314.852, 131.683, 325.743, 122.772)
+bones = ["root", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0), "root/tail", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), "root/neck", PackedFloat32Array(1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.73, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.73, 0, 0, 0.73, 1, 1, 1), "root/neck/head", PackedFloat32Array(0, 0.73, 0.73, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.73, 0.73, 0.73, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="BodyPolygon" type="Polygon2D" parent="Body/Flippable"]
+z_index = 1
+material = SubResource("ShaderMaterial_ws2w8")
+position = Vector2(-52, -54)
+scale = Vector2(0.203936, 0.215228)
+texture = ExtResource("4_yqkq3")
+skeleton = NodePath("../Skeleton")
+polygon = PackedVector2Array(93.0693, 70.297, 138.614, 75.2475, 196.04, 90.099, 229.703, 139.604, 231.683, 167.327, 275.248, 166.337, 313.861, 136.634, 340.594, 118.812, 382.178, 163.366, 434.653, 184.158, 466.337, 215.842, 468.317, 279.208, 442.574, 326.733, 398.02, 353.465, 335.644, 378.218, 228.713, 400, 153.465, 383.168, 126.733, 402.97, 103.96, 453.465, 77.2277, 475.248, 31.6832, 408.911, 3.9604, 311.881, -21.7822, 204.951, 4.95049, 141.584, 55.4455, 89.1089)
+uv = PackedVector2Array(93.0693, 70.297, 138.614, 75.2475, 196.04, 90.099, 229.703, 139.604, 231.683, 167.327, 275.248, 166.337, 313.861, 136.634, 340.594, 118.812, 382.178, 163.366, 434.653, 184.158, 466.337, 215.842, 468.317, 279.208, 442.574, 326.733, 398.02, 353.465, 335.644, 378.218, 228.713, 400, 153.465, 383.168, 126.733, 402.97, 103.96, 453.465, 77.2277, 475.248, 31.6832, 408.911, 3.9604, 311.881, -21.7822, 204.951, 4.95049, 141.584, 55.4455, 89.1089)
+bones = ["root", PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0.73, 0.73, 0.73, 1, 1, 1, 0.73, 0, 0, 0, 0, 0, 0.73, 1, 1), "root/tail", PackedFloat32Array(1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1), "root/neck", PackedFloat32Array(0.09, 0.09, 0.09, 0.09, 0.09, 0.03, 1, 1, 1, 1, 1, 0.73, 0, 0, 0.03, 0.03, 0.09, 0.09, 0.09, 0.06, 0.09, 0.09, 0.09, 0.09, 0.09), "root/neck/head", PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)]
+
+[node name="NeckStart" type="Marker2D" parent="Body/Flippable"]
+position = Vector2(25, -11)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(-1.5, -1)
+shape = SubResource("CircleShape2D_d444i")
+
+[node name="Head" type="RigidBody2D" parent="."]
+position = Vector2(64, -98)
+collision_layer = 8
+collision_mask = 9
+gravity_scale = 0.0
+lock_rotation = true
+max_contacts_reported = 4
+contact_monitor = true
+script = ExtResource("5_lpnbq")
+
+[node name="NeckEnd" type="Marker2D" parent="Head"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_xp8kh")
