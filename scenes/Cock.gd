@@ -7,9 +7,11 @@ extends Node2D
 @onready var Head: RigidBody2D = $Head
 @onready var Body: RigidBody2D = $Body
 
-@onready var NeckStart: Marker2D = $Body/Flippable/NeckStart
+
 @onready var NeckEnd: Marker2D = $Head/NeckEnd
-@onready var NeckPath: Node = $NeckPath
+@onready var NeckStart: Marker2D = $Body/Flippable/NeckStart
+@onready var NeckBone: Bone2D = $Body/Flippable/Skeleton/root/neck
+@onready var HeadBone: Bone2D = $Body/Flippable/Skeleton/root/neck/head
 
 var h_radius : float
 var target_pos : Vector2
@@ -47,18 +49,11 @@ func _physics_process(delta):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var mpos = get_global_mouse_position()
 	var p1 = NeckStart.global_position
 	var p2 = NeckEnd.global_position
 	
-	var dists = [0.2, 0.5, 0.7]
-	var scales= [1, 1, 1]
-	for i in NeckPath.get_child_count():
-		var segment : Sprite2D = NeckPath.get_child(i)
-
-		segment.scale.y = (p1-p2).length() * scales[i] / h_radius
-		segment.global_rotation = (p1 - p2).angle() + PI/2
-		segment.global_position = p1.lerp(p2, dists[i]) 
+	NeckBone.look_at(p2)
+	HeadBone.global_position = p2
 	
 	if sign(Body.global_position.x - p1.x) != sign(Body.global_position.x - Head.global_position.x)\
 		and abs(Body.global_position.x - Head.global_position.x) > 0.2*h_radius:
