@@ -26,6 +26,14 @@ window/vsync/vsync_mode=0
 
 project/assembly_name="Spelsylt"
 
+[layer_names]
+
+2d_physics/layer_10="Camera Zones"
+
+[physics]
+
+common/physics_ticks_per_second=144
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

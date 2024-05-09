@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://ciooweqddbdpc"]
 
-[ext_resource type="Script" path="res://scenes/Cock.gd" id="1_ytq8x"]
+[ext_resource type="Script" path="res://scripts/Cock.gd" id="1_r21cm"]
 [ext_resource type="Texture2D" uid="uid://dynmji5sp3elp" path="res://assets/rooster.png" id="2_blelg"]
 [ext_resource type="Shader" path="res://Shaders/ColorSpace.gdshader" id="3_2puk5"]
 [ext_resource type="Texture2D" uid="uid://dup0yc1byrwyb" path="res://assets/rooster2.png" id="4_yqkq3"]
-[ext_resource type="Script" path="res://scenes/Head.gd" id="5_lpnbq"]
+[ext_resource type="Script" path="res://scripts/Head.gd" id="5_ta4gi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ws2w8"]
 shader = ExtResource("3_2puk5")
@@ -21,10 +21,10 @@ radius = 15.0
 
 [node name="Cock" type="Node2D"]
 position = Vector2(344, 160)
-script = ExtResource("1_ytq8x")
+script = ExtResource("1_r21cm")
 
 [node name="Body" type="RigidBody2D" parent="."]
-collision_layer = 2
+collision_layer = 514
 collision_mask = 5
 mass = 3.0
 lock_rotation = true
@@ -88,7 +88,16 @@ position = Vector2(25, -11)
 position = Vector2(-1.5, -1)
 shape = SubResource("CircleShape2D_d444i")
 
+[node name="SceneCollider" type="Area2D" parent="Body"]
+collision_layer = 0
+collision_mask = 512
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body/SceneCollider"]
+position = Vector2(-1.5, -1)
+shape = SubResource("CircleShape2D_d444i")
+
 [node name="Head" type="RigidBody2D" parent="."]
+visible = false
 position = Vector2(64, -98)
 collision_layer = 8
 collision_mask = 9
@@ -96,7 +105,7 @@ gravity_scale = 0.0
 lock_rotation = true
 max_contacts_reported = 4
 contact_monitor = true
-script = ExtResource("5_lpnbq")
+script = ExtResource("5_ta4gi")
 
 [node name="NeckEnd" type="Marker2D" parent="Head"]
 
