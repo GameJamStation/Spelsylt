@@ -1,0 +1,188 @@
+[gd_scene load_steps=11 format=3 uid="uid://c6bu7fhnbdspl"]
+
+[ext_resource type="Shader" path="res://Shaders/ColorSpace.gdshader" id="1_2auar"]
+[ext_resource type="Script" path="res://objects/bomba.gd" id="1_7hnjl"]
+[ext_resource type="Texture2D" uid="uid://odumviw7n10q" path="res://assets/blood2.png" id="2_ih8ph"]
+[ext_resource type="Texture2D" uid="uid://dppbsih0rorft" path="res://assets/bone2.png" id="3_sqtdl"]
+[ext_resource type="Texture2D" uid="uid://eg3x372xcwi2" path="res://assets/bone.png" id="4_uawc4"]
+[ext_resource type="Texture2D" uid="uid://cyweu4hqlvrbq" path="res://assets/feather3.png" id="5_ofp68"]
+[ext_resource type="Texture2D" uid="uid://b85kvyaj6e8iv" path="res://assets/feather.png" id="6_17l45"]
+[ext_resource type="Texture2D" uid="uid://cbd2nt8ig2jyx" path="res://assets/feather2.png" id="7_1s24t"]
+[ext_resource type="Texture2D" uid="uid://dv3etmuf2n3uq" path="res://assets/blood.png" id="8_ximc0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yb5xv"]
+shader = ExtResource("1_2auar")
+shader_parameter/pixelFactor = 320.0
+shader_parameter/colorFactor = 5.348
+shader_parameter/brightNessFactor = 0.0
+shader_parameter/ditherScale = 0.005
+
+[node name="bomba" type="Node2D"]
+script = ExtResource("1_7hnjl")
+
+[node name="blood2" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 32
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.9
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("2_ih8ph")
+emission_shape = 1
+emission_sphere_radius = 12.64
+spread = 180.0
+gravity = Vector2(0, 98)
+initial_velocity_max = 171.72
+angular_velocity_min = -43.63
+angular_velocity_max = 189.09
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+
+[node name="bone1" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 32
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("3_sqtdl")
+emission_shape = 1
+emission_sphere_radius = 12.64
+spread = 180.0
+gravity = Vector2(0, 98)
+initial_velocity_max = 171.72
+angular_velocity_min = -43.63
+angular_velocity_max = 189.09
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+
+[node name="bone2" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 32
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("4_uawc4")
+emission_shape = 1
+emission_sphere_radius = 12.64
+spread = 180.0
+gravity = Vector2(0, 98)
+initial_velocity_max = 171.72
+angular_velocity_min = -43.63
+angular_velocity_max = 189.09
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+
+[node name="feather" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 16
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("5_ofp68")
+emission_shape = 1
+emission_sphere_radius = 12.64
+direction = Vector2(0, -1)
+spread = 21.95
+gravity = Vector2(0, 57.275)
+initial_velocity_min = 101.01
+initial_velocity_max = 171.72
+angular_velocity_min = -247.27
+angular_velocity_max = 145.45
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+
+[node name="feather2" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 16
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("6_17l45")
+emission_shape = 1
+emission_sphere_radius = 12.64
+direction = Vector2(0, -1)
+spread = 21.95
+gravity = Vector2(0, 57.275)
+initial_velocity_min = 101.01
+initial_velocity_max = 171.72
+angular_velocity_min = -247.27
+angular_velocity_max = 145.45
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+
+[node name="feather3" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 16
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("7_1s24t")
+emission_shape = 1
+emission_sphere_radius = 12.64
+direction = Vector2(0, -1)
+spread = 21.95
+gravity = Vector2(0, 57.275)
+initial_velocity_min = 101.01
+initial_velocity_max = 171.72
+angular_velocity_min = -247.27
+angular_velocity_max = 145.45
+scale_amount_min = 0.1
+scale_amount_max = 0.1
+
+[node name="blood1" type="CPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_yb5xv")
+emitting = false
+amount = 32
+lifetime = 5.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.9
+randomness = 0.66
+lifetime_randomness = 0.2
+fixed_fps = 30
+draw_order = 1
+texture = ExtResource("8_ximc0")
+emission_shape = 1
+emission_sphere_radius = 12.64
+spread = 180.0
+gravity = Vector2(0, 98)
+initial_velocity_max = 171.72
+angular_velocity_min = -43.63
+angular_velocity_max = 189.09
+scale_amount_min = 0.1
+scale_amount_max = 0.1

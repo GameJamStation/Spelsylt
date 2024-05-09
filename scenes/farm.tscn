@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xjnlcna0b87t"]
+[gd_scene load_steps=14 format=3 uid="uid://xjnlcna0b87t"]
 
 [ext_resource type="Shader" path="res://Shaders/Pixelation.gdshader" id="1_e27wd"]
 [ext_resource type="Script" path="res://scenes/Camera.gd" id="1_ya5mg"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" path="res://Shaders/OutlineShader.gdshader" id="4_2hbg2"]
 [ext_resource type="Texture2D" uid="uid://da46jk4u5dy0d" path="res://assets/farm/barn.png" id="4_3u0i3"]
 [ext_resource type="Texture2D" uid="uid://krhl5scsvhvp" path="res://assets/farm/bliss_background.png" id="5_vcl6x"]
+[ext_resource type="PackedScene" uid="uid://c6bu7fhnbdspl" path="res://objects/bomba.tscn" id="8_yqxey"]
 [ext_resource type="PackedScene" uid="uid://ciooweqddbdpc" path="res://objects/cock.tscn" id="9_wfnbb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_f5heg"]
@@ -94,3 +95,5 @@ RANDOM_SHAKE_STRENGTH = null
 SHAKE_DECAY_RATE = null
 TARGET_OFFSET = Vector2(0, -50)
 LERP_SPEED = 3.0
+
+[node name="bomba" parent="." instance=ExtResource("8_yqxey")]

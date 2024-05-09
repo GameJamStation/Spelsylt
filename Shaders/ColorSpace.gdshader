@@ -27,11 +27,11 @@ void fragment()
 	float grid_uv_y = round(UV.y * factorY) / factorY;
 	
 	// 
-	vec3 color = texture(TEXTURE, vec2(grid_uv_x, grid_uv_y)).xyz;
+	vec4 color = texture(TEXTURE, vec2(grid_uv_x, grid_uv_y));
 	
-	color += ditherTable[int(coor.x) % 4][int(coor.y) % 4] * ditherScale;
+	color.xyz += ditherTable[int(coor.x) % 4][int(coor.y) % 4] * ditherScale;
 	
-	color = brightNessFactor + floor(color * colorFactor) / colorFactor;
+	color.xyz = brightNessFactor + floor(color.xyz * colorFactor) / colorFactor;
 	
-	COLOR = vec4(color.xyz,1.0);
+	COLOR = color;
 }

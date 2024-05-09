@@ -6,6 +6,7 @@ extends Node2D
 
 @onready var Head: RigidBody2D = $Head
 @onready var Body: RigidBody2D = $Body
+@onready var Explosion: Node2D = $Explosion
 
 
 @onready var NeckEnd: Marker2D = $Head/NeckEnd
@@ -43,6 +44,9 @@ func _physics_process(delta):
 		Head.apply_impulse(-v*Head.mass, Head.global_position)
 		
 	
+	if (curr_mpos - last_mpos).length() * delta > 10:
+		explode()
+	
 	last_target_delta = target_delta
 	last_mpos = curr_mpos
 	pass
@@ -60,3 +64,7 @@ func _process(delta):
 		$Body/Flippable.transform.x.x *= -1
 	
 	pass
+
+func explode():
+	Explosion.global_position = Body.global_position
+	Explosion.trigger()
