@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://co1wedfjluta6"]
 
-[ext_resource type="Script" path="res://scenes/Camera.gd" id="1_eo4m4"]
-[ext_resource type="Script" path="res://scenes/Cock.gd" id="2_emrva"]
+[ext_resource type="Script" path="res://scripts/Camera.gd" id="1_eo4m4"]
+[ext_resource type="Script" path="res://scripts/Cock.gd" id="2_emrva"]
 
 [sub_resource type="Gradient" id="Gradient_yupuy"]
 
@@ -34,6 +34,7 @@ RANDOM_SHAKE_STRENGTH = null
 SHAKE_DECAY_RATE = null
 TARGET_OFFSET = null
 LERP_SPEED = null
+IS_STATIC = null
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(83, 426)

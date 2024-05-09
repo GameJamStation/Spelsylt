@@ -1,4 +1,6 @@
+class_name Cock 
 extends Node2D
+		
 @export var FORCE_SCALAR = 100
 @export var DAMP_SCALAR = 5
 @export var NECKMAX_SCALAR : float = 1.2
@@ -13,17 +15,24 @@ extends Node2D
 @onready var NeckStart: Marker2D = $Body/Flippable/NeckStart
 @onready var NeckBone: Bone2D = $Body/Flippable/Skeleton/root/neck
 @onready var HeadBone: Bone2D = $Body/Flippable/Skeleton/root/neck/head
-
+@onready var SceneCollider: Area2D = $Body/SceneCollider
 var h_radius : float
 var target_pos : Vector2
+
+var current_scene: Area2D
+var next_scene: Area2D 
 
 @onready var last_mpos : Vector2 = get_global_mouse_position()
 @onready var last_target_delta : Vector2
 
 
+signal new_scene_entered(scene_node: Node2D)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	h_radius = NECKMAX_SCALAR * Head.global_position.distance_to(Body.global_position)
+	SceneCollider.area_entered.connect(on_scene_entered)
+	SceneCollider.area_exited.connect(on_scene_exited)
 	pass # Replace with function body.
 
 func _physics_process(delta):
@@ -68,3 +77,25 @@ func _process(delta):
 func explode():
 	Explosion.global_position = Body.global_position
 	Explosion.trigger()
+
+
+func on_scene_entered(body: Node2D):
+	if(current_scene == null):
+		current_scene = body
+		new_scene_entered.emit(current_scene)
+	else:
+		next_scene = body
+	pass
+
+func on_scene_exited(body: Node2D):
+	if current_scene == body:
+		if next_scene != null:
+			current_scene = next_scene
+			next_scene = null
+			new_scene_entered.emit(current_scene)
+		else: 
+			current_scene = null
+
+	if next_scene == body:
+		next_scene = null
+	pass
